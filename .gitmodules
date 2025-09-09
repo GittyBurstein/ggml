@@ -1,0 +1,4 @@
+[submodule "ggml"]
+	path = ggml
+	url = https://github.com/GittyBurstein/ggml.git
+	branch = feature/sycl-arange-ggml
