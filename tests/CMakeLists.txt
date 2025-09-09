@@ -108,6 +108,22 @@ function(llama_build_and_test source)
     set_property(TEST ${TEST_TARGET} PROPERTY LABELS ${LLAMA_TEST_LABEL})
 endfunction()
 
+# --- SYCL: arange ---
+add_executable(test-sycl-arange test-sycl-arange.cpp)
+
+target_include_directories(test-sycl-arange PRIVATE
+    ${CMAKE_SOURCE_DIR}/ggml/include
+    ${CMAKE_SOURCE_DIR}/ggml/src/ggml-sycl
+)
+target_link_libraries(test-sycl-arange PRIVATE ggml-sycl ggml ggml-base)
+
+add_test(NAME sycl_arange COMMAND test-sycl-arange)
+
+set_tests_properties(sycl_arange PROPERTIES
+    ENVIRONMENT "SYCL_DEVICE_FILTER=opencl:gpu"
+)
+
+
 # build test-tokenizer-0 target once and add many tests
 llama_build(test-tokenizer-0.cpp)
 
