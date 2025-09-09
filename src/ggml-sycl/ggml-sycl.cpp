@@ -3669,6 +3669,9 @@ static bool ggml_sycl_compute_forward(ggml_backend_sycl_context & ctx, struct gg
         case GGML_OP_PAD:
             ggml_sycl_pad(ctx, dst);
             break;
+        case GGML_OP_ARANGE:
+            ggml_sycl_arange(ctx, dst);
+            break;
         case GGML_OP_LEAKY_RELU:
             ggml_sycl_leaky_relu(ctx, dst);
             break;
